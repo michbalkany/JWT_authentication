@@ -47,3 +47,9 @@ def Login():
         return jsonify(access_token = access_token)
     else: 
         return jsonify("Email or Password is Invalid")
+
+@api.route('/token', methods=['GET'])
+@jwt_required()
+def validate_identity():
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as = current_user)
